@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import data1 from "./data";
+import "./ApiFetch.css";
 
 export const ApiFetch = () => {
   const [users, setUsers] = useState([]);
@@ -13,6 +14,7 @@ export const ApiFetch = () => {
         const data = await response.json();
 
         setUsers(data.slice(0, 10));
+        console.log(data.slice(0, 10));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -27,10 +29,19 @@ export const ApiFetch = () => {
       <ul>
         {users?.map((val, id) => {
           return (
-            <div style={val.id === 4 ? { color: "red" } : null}>
-              <h1>{val?.id}</h1>
-              <h1>{val?.title}</h1>
-            </div>
+            <>
+              <div className="card">
+                <img
+                  src={val.thumbnailUrl}
+                  alt="Avatar"
+                  style={{ width: 100 }}
+                ></img>
+                <div className="container">
+                  <div className="id-card">{val.id}</div>
+                  <div>{val.title}</div>
+                </div>
+              </div>
+            </>
           );
         })}
       </ul>

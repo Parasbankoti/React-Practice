@@ -1,0 +1,14 @@
+.card {
+  background-color: red;
+  display: flex;
+  padding: 5px;
+}
+
+.container {
+  padding: 5px;
+  display: flex;
+}
+
+.id-card {
+  padding: 5px;
+}
