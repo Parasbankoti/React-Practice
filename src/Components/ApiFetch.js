@@ -1,43 +1,41 @@
 import React, { useEffect, useState } from "react";
 import data1 from "./data";
 import "./ApiFetch.css";
+import logo from "./loading.gif";
+
+const Base_URL = "https://jsonplaceholder.typicode.com/posts";
 
 export const ApiFetch = () => {
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/photos"
-        );
-        const data = await response.json();
-
-        setUsers(data.slice(0, 10));
-        console.log(data.slice(0, 10));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+    const fetchApi = async () => {
+      setIsLoading(true);
+      const response = await fetch(`${Base_URL}`);
+      const data = await response.json();
+      setUsers(data.slice(0, 10));
+      setIsLoading(false);
     };
-
-    fetchData();
+    fetchApi();
   }, []);
+
+  if (isLoading) {
+    return <img src={logo} />;
+  }
 
   return (
     <div>
       <h1>User List</h1>
+
       <ul>
         {users?.map((val, id) => {
           return (
             <>
               <div className="card">
-                <img
-                  src={val.thumbnailUrl}
-                  alt="Avatar"
-                  style={{ width: 100 }}
-                ></img>
+                <img src={""} alt="Avatar" style={{ width: 100 }}></img>
                 <div className="container">
-                  <div className="id-card">{val.id}</div>
+                  <div className="id-card">{val.body}</div>
                   <div>{val.title}</div>
                 </div>
               </div>

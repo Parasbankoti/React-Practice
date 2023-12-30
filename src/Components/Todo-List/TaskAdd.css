@@ -1,0 +1,17 @@
+.input-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.input-area {
+  height: 20px;
+  border-radius: 60px;
+  width: 30%;
+  padding: 5px;
+}
+
+.btn-submit {
+  cursor: pointer;
+  border-radius: 10px;
+}
