@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./TaskAdd.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faEdit, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid";
 
 export const TaskAdd = () => {
@@ -10,20 +10,29 @@ export const TaskAdd = () => {
 
   const addTask = () => {
     const newId = uuidv4(); // Generate a unique id using uuid
-    setTodos([...todos, { id: newId, input }]);
+
+    setTodos([...todos, { id: newId, input, completed: false }]);
     setInput("");
   };
-  console.log(todos);
   const deleteTodo = (id) => {
     const newTodoList = todos.filter((item) => item.id !== id);
-    console.log(id);
     setTodos(newTodoList);
   };
 
-  const doneTodo = (id) => {
-    // You can handle completed tasks here if needed
-    console.log("Task completed:", id);
-  };
+  // const editTodo = (id) => {
+  //   const updatedTodo = todos.map((val) => )
+
+  // };
+
+  // const doneTodo = (id) => {
+  //   const newArr = todos.map((val) => {
+  //     if (val.id === id) {
+  //       console.log(val);
+  //       val.completed = true;
+  //     }
+  //   });
+  //   console.log(newArr);
+  // };
 
   return (
     <div>
@@ -34,9 +43,11 @@ export const TaskAdd = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <button type="submit" className="btn-submit" onClick={addTask}>
-          Add Task
-        </button>
+        {
+          <button type="submit" disabled={!input.trim()} onClick={addTask}>
+            Add Task
+          </button>
+        }
       </div>
       <div className="viewTodo">
         <ul>
@@ -47,10 +58,7 @@ export const TaskAdd = () => {
                 icon={faTimes}
                 onClick={() => deleteTodo(val.id)}
               />
-              <FontAwesomeIcon
-                icon={faCheck}
-                onClick={() => doneTodo(val.id)}
-              />
+              {/* <FontAwesomeIcon icon={faEdit} onClick={() => editTodo(val.id)} /> */}
             </div>
           ))}
         </ul>

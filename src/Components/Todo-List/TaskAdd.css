@@ -21,3 +21,12 @@
   justify-content: space-evenly;
   align-items: center;
 }
+
+.completed {
+  text-decoration: line-through;
+  background-color: red;
+}
+.hello {
+  text-decoration: line-through;
+  background-color: red;
+}
